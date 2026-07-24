@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rosemarie's 18th Birthday Invitation</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="stylesheet.css">
+</head>
+<body>
+
+<div class="stage">
+  <div class="eyebrow">You're Invited</div>
+  <div class="card-wrap">
+    <div class="card" id="card">
+      <div class="face front">
+        <div class="frame">
+          <div class="num18">18</div>
+          <div class="sub">Debut Celebration</div>
+          <div class="name">Rosemarie</div>
+          <div class="tagline">tap the card to open</div>
+          <button class="open-btn" id="openBtn" type="button">Open Invitation</button>
+        </div>
+      </div>
+
+      <div class="face back">
+        <div class="back-header">
+          <div class="eyebrow2">Please Join Us</div>
+          <h1>Rosemarie turns 18</h1>
+          <div class="theme">✿ Theme: Pink Garden Dream ✿</div>
+        </div>
+        <div class="divider"></div>
+
+        <div class="details">
+          <div class="detail-row">
+            <span class="ic">📅</span>
+            <div>
+              <span class="label">Date</span>
+              <span class="value">Saturday, October 3, 2026</span>
+            </div>
+          </div>
+          <div class="detail-row">
+            <span class="ic">🕕</span>
+            <div>
+              <span class="label">Time</span>
+              <span class="value">6:00 PM onwards</span>
+            </div>
+          </div>
+          <div class="detail-row">
+            <span class="ic">📍</span>
+            <div>
+              <span class="label">Venue</span>
+              <span class="value">The Garden Pavilion, 123 Blossom Lane, Quezon City</span>
+            </div>
+          </div>
+          <div class="detail-row">
+            <span class="ic">👗</span>
+            <div>
+              <span class="label">Dress Code</span>
+              <span class="value">Pastel Formal / Garden Chic</span>
+            </div>
+          </div>
+          <div class="detail-row">
+            <span class="ic">💌</span>
+            <div>
+              <span class="label">RSVP</span>
+              <span class="value">Text Maria (Mom) at 0917-123-4567 by Sept 20</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="rsvp-note">"A garden of memories, waiting to bloom together."</div>
+        <button class="close-btn" id="closeBtn" type="button">close card</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  const card = document.getElementById('card');
+  const openBtn = document.getElementById('openBtn');
+  const closeBtn = document.getElementById('closeBtn');
+
+  function openCard(e){
+    e.stopPropagation();
+    card.classList.add('open');
+    burstPetals(18);
+  }
+  function closeCard(e){
+    e.stopPropagation();
+    card.classList.remove('open');
+  }
+
+  openBtn.addEventListener('click', openCard);
+  closeBtn.addEventListener('click', closeCard);
+  card.addEventListener('click', function(){
+    if(!card.classList.contains('open')) openCard(new Event('click'));
+  });
+
+  // ambient gentle petals
+  const emojis = ['🌸','✿','🌷','🎀'];
+  function spawnPetal(x){
+    const p = document.createElement('div');
+    p.className = 'petal';
+    p.textContent = emojis[Math.floor(Math.random()*emojis.length)];
+    const size = 14 + Math.random()*14;
+    p.style.fontSize = size + 'px';
+    p.style.left = (x !== undefined ? x : Math.random()*100) + 'vw';
+    const duration = 7 + Math.random()*6;
+    p.style.animationDuration = duration + 's';
+    document.body.appendChild(p);
+    setTimeout(()=>p.remove(), duration*1000);
+  }
+  setInterval(()=>spawnPetal(), 900);
+  function burstPetals(n){
+    for(let i=0;i<n;i++){
+      setTimeout(()=>spawnPetal(), i*60);
+    }
+  }
+</script>
+
+</body>
+</html>
